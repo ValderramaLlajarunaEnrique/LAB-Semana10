@@ -9,14 +9,14 @@
 services:
   # ----------------------------- Aplicaciones -----------------------------
   backend:
-    build: ./apps/backend
+    build: ./app/backend
     container_name: lab-backend
     ports:
       - "3001:3001"
     restart: unless-stopped
 
   frontend:
-    build: ./apps/frontend
+    build: ./app/frontend
     container_name: lab-frontend
     environment:
       - BACKEND_URL=http://backend:3001
