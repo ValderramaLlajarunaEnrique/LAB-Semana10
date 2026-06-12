@@ -1,7 +1,7 @@
 {
   "name": "enrique-frontend",
   "version": "1.0.0",
-  "description": "Frontend instrumentado para observabilidad - Alessandro Rodriguez",
+  "description": "Frontend instrumentado para observabilidad - Enrique Valderrama",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
