@@ -1,0 +1,9 @@
+13. Preguntas a responder
+¿Por qué necesitamos Loki además de Prometheus si ya tenemos /metrics?
+Prometheus solo almacena métricas numéricas (números en el tiempo), no puede guardar texto. Los logs son líneas de texto con eventos, errores y trazas que no se pueden representar como un número. Loki complementa a Prometheus almacenando esos logs, permitiendo buscar errores específicos, ver el detalle de lo que ocurrió y correlacionar un pico de CPU con el mensaje de error que lo causó.
+¿Qué ventaja aporta que las fuentes de datos de Grafana estén aprovisionadas como código y no creadas a mano?
+Al estar definidas en archivos (como datasources.yml), la configuración es reproducible y versionable en Git. Cualquier persona que clone el repositorio y ejecute docker compose up obtiene exactamente el mismo entorno sin tener que recordar hacer clic en ningún lado. Elimina errores humanos y facilita el trabajo en equipo.
+El panel "CPU contenedor" y el panel "CPU host" pueden mostrar valores muy distintos. ¿Por qué? ¿Cuál usarías para alertar sobre una aplicación concreta?
+El panel "CPU host" muestra el uso total de toda la máquina, incluyendo todos los procesos y contenedores. El panel "CPU contenedor" muestra solo lo que consume ese contenedor específico. Pueden diferir mucho si hay otros procesos corriendo. Para alertar sobre una aplicación concreta usaría el panel del contenedor, porque refleja exactamente el consumo de ese servicio y no se ve afectado por otros procesos del sistema.
+¿Qué diferencia hay entre el evaluation interval y el pending period de una alarma?
+El evaluation interval es cada cuánto Grafana evalúa la condición de la alarma (en este lab, cada 10 segundos). El pending period es cuánto tiempo debe mantenerse la condición superada antes de pasar a estado Firing (en este lab, 30 segundos). Esto evita falsas alarmas por picos cortos: si la CPU sube por 5 segundos y baja, la alarma no se dispara.
